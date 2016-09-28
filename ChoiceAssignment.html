@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset = "utf-8"
+    <title> Cricket </title>
+    <script src="vue.js"></script>
+    <div id="app">
+      <h1> Quiz tiiime</h1>
+        <v-for="Question in questions">
+        <h3>{{questions}}</h3>
+      </div>
+
+      <script>
+      new vue({
+        el:'#app',
+        data: {
+          questions:[
+
+              "Question 1",
+              "Question 2",
+              "Question 3",
+              "Question 4"
+
+          ]
+        },
+      })
+      </script>
+    </body>
+    </html>
