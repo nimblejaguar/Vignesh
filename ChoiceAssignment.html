@@ -1,30 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset = "utf-8"
-    <title> Cricket </title></head>
-    <body>
-    <script src="vue.js"></script>
-    <div id="app">
-      <h1> Quiz tiiime</h1>
-        <v-for="Question in questions">
-        <h3>{{questions}}</h3>
+<head>
+  <meta charset = "utf-8">
+  <title> Cricket </title>
+</head>
+<body>
+  <script src="vue.js"></script>
+  <div id="app">
+    <h1> Quiz tiiime</h1>
+    <h2>Score: {{ score }}</h2>
+    <div v-for="Question in questions">
+      <h3>{{Question.questionLabel}}</h3>
+      <div v-if="Question.hasAttempted == false" v-for ="option in Question.options">
+        <button @click="optionClicked(option,Question)">
+          {{option.optionLabel}}
+        </button>
       </div>
+      <div v-if="Question.hasAttempted == true">Attempted.</div>
+    </div>
+  </div>
 
-      <script>
-      new vue({
-        el:'#app',
-        data: {
-          questions:[
+  <script>
+  new Vue({
+    el:'#app',
+    methods: {
+      optionClicked: function(option,Question){
+        Question.hasAttempted=true;
 
-              "Question 1",
-              "Question 2",
-              "Question 3",
-              "Question 4"
+        if(option.isCorrect==true){
+          this.score+=1;
+        } else {
+          this.score -=1;
+        }
 
+        alert("hey, you clicked the "+ option.isCorrect+ " option" );
+      }
+
+    },
+    data: {
+      score: 0,
+      questions: [
+        {
+          hasAttempted: false,
+          questionLabel: "How many tests has Tendulkar played?",
+          options: [
+            {
+              optionLabel: "199",
+              isCorrect: false
+            },
+            {
+              optionLabel: "200",
+              isCorrect: true
+            },
           ]
         },
-      })
-      </script>
-    </body>
-    </html>
+        {
+          hasAttempted: false,
+          questionLabel: "question 2",
+          options: [
+            {
+              optionLabel: "option 1",
+              isCorrect: true
+            },
+            {
+              optionLabel: "option 2",
+              isCorrect: false
+            },
+          ]
+        }
+      ]
+    },
+  })
+  </script>
+</body>
+</html>
